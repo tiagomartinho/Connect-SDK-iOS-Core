@@ -144,7 +144,7 @@
     return _consolidatedServiceDescription.address;
 }
 
-- (NSUInteger *) port
+- (NSUInteger) port
 {
     return _consolidatedServiceDescription.port;
 }

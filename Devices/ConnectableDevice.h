@@ -71,7 +71,7 @@
 /*! Current IP address of the ConnectableDevice. */
 @property (nonatomic, readonly) NSString *address;
 
-@property (nonatomic, readonly) NSUInteger *port;
+@property (nonatomic) NSUInteger port;
 
 /*! An estimate of the ConnectableDevice's current friendly name. */
 @property (nonatomic, readonly) NSString *friendlyName;
