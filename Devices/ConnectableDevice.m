@@ -144,6 +144,11 @@
     return _consolidatedServiceDescription.address;
 }
 
+- (NSUInteger *) port
+{
+    return _consolidatedServiceDescription.port;
+}
+
 - (NSString *) friendlyName
 {
     return _consolidatedServiceDescription.friendlyName;
@@ -152,6 +157,11 @@
 - (NSString *) modelName
 {
     return _consolidatedServiceDescription.modelName;
+}
+
+- (NSString *) manufacturer
+{
+    return _consolidatedServiceDescription.manufacturer;
 }
 
 - (NSString *) modelNumber

@@ -71,11 +71,15 @@
 /*! Current IP address of the ConnectableDevice. */
 @property (nonatomic, readonly) NSString *address;
 
+@property (nonatomic, readonly) NSUInteger *port;
+
 /*! An estimate of the ConnectableDevice's current friendly name. */
 @property (nonatomic, readonly) NSString *friendlyName;
 
 /*! An estimate of the ConnectableDevice's current model name. */
 @property (nonatomic, readonly) NSString *modelName;
+
+@property (nonatomic, readonly) NSString *manufacturer;
 
 /*! An estimate of the ConnectableDevice's current model number. */
 @property (nonatomic, readonly) NSString *modelNumber;
