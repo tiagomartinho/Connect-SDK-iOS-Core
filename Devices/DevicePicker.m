@@ -21,6 +21,7 @@
 #import "DevicePicker.h"
 #import "DiscoveryProvider.h"
 #import "DiscoveryManager.h"
+#import "UIApplicationHelper.h"
 
 @implementation DevicePicker
 {
@@ -143,41 +144,42 @@
     NSString *pickerTitle = [[NSBundle mainBundle] localizedStringForKey:@"Connect_SDK_Search_Title" value:@"Pick a device" table:@"ConnectSDK"];
     NSString *pickerCancel = [[NSBundle mainBundle] localizedStringForKey:@"Connect_SDK_Search_Cancel" value:@"Cancel" table:@"ConnectSDK"];
     
-    _actionSheet = [[UIActionSheet alloc] initWithTitle:pickerTitle
-                                               delegate:self
-                                      cancelButtonTitle:nil
-                                 destructiveButtonTitle:nil
-                                      otherButtonTitles:nil];
-
-    @synchronized (_generatedDeviceList)
-    {
-        _actionSheetDeviceList = [_generatedDeviceList copy];
-    }
-
-    [_actionSheetDeviceList enumerateObjectsUsingBlock:^(ConnectableDevice *device, NSUInteger idx, BOOL *stop)
-    {
-        [_actionSheet addButtonWithTitle:device.friendlyName];
-    }];
-    
-    _actionSheet.cancelButtonIndex = [_actionSheet addButtonWithTitle:pickerCancel];
-    
-    if ([sender isKindOfClass:[UIBarButtonItem class]])
-        [_actionSheet showFromBarButtonItem:sender animated:_shouldAnimatePicker];
-    else if ([sender isKindOfClass:[UITabBar class]])
-        [_actionSheet showFromTabBar:sender];
-    else if ([sender isKindOfClass:[UIToolbar class]])
-        [_actionSheet showFromToolbar:sender];
-    else if ([sender isKindOfClass:[UIControl class]])
-    {
-        UIControl *senderView = (UIControl *)sender;
-        [_actionSheet showFromRect:senderView.frame inView:senderView.superview animated:_shouldAnimatePicker];
-    } else
-    {
-        [_actionSheet showInView:sender];
-        
-        _actionSheetTargetView = sender;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRotation) name:UIDeviceOrientationDidChangeNotification object:nil];
-    }
+    // TODO
+//    _actionSheet = [[UIActionSheet alloc] initWithTitle:pickerTitle
+//                                               delegate:self
+//                                      cancelButtonTitle:nil
+//                                 destructiveButtonTitle:nil
+//                                      otherButtonTitles:nil];
+//
+//    @synchronized (_generatedDeviceList)
+//    {
+//        _actionSheetDeviceList = [_generatedDeviceList copy];
+//    }
+//
+//    [_actionSheetDeviceList enumerateObjectsUsingBlock:^(ConnectableDevice *device, NSUInteger idx, BOOL *stop)
+//    {
+//        [_actionSheet addButtonWithTitle:device.friendlyName];
+//    }];
+//    
+//    _actionSheet.cancelButtonIndex = [_actionSheet addButtonWithTitle:pickerCancel];
+//    
+//    if ([sender isKindOfClass:[UIBarButtonItem class]])
+//        [_actionSheet showFromBarButtonItem:sender animated:_shouldAnimatePicker];
+//    else if ([sender isKindOfClass:[UITabBar class]])
+//        [_actionSheet showFromTabBar:sender];
+//    else if ([sender isKindOfClass:[UIToolbar class]])
+//        [_actionSheet showFromToolbar:sender];
+//    else if ([sender isKindOfClass:[UIControl class]])
+//    {
+//        UIControl *senderView = (UIControl *)sender;
+//        [_actionSheet showFromRect:senderView.frame inView:senderView.superview animated:_shouldAnimatePicker];
+//    } else
+//    {
+//        [_actionSheet showInView:sender];
+//        
+//        _actionSheetTargetView = sender;
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRotation) name:UIDeviceOrientationDidChangeNotification object:nil];
+//    }
 }
 
 - (void) showNavigation
@@ -186,7 +188,7 @@
 
     _tableViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:pickerCancel style:UIBarButtonItemStylePlain target:self action:@selector(dismissPicker:)];
     
-    UIWindow *mainWindow = [[UIApplication sharedApplication].windows firstObject];
+    UIWindow *mainWindow = [[UIApplicationHelper sharedApplication].windows firstObject];
     [mainWindow.rootViewController presentViewController:_navigationController animated:self.shouldAnimatePicker completion:nil];
 }
 
