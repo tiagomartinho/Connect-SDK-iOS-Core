@@ -26,6 +26,7 @@
 #import "DeviceServiceReachability.h"
 #import "CTGuid.h"
 #import "GCDWebServer.h"
+#import "UIApplicationHelper.h"
 
 #import "CTASIHTTPRequest.h"
 
